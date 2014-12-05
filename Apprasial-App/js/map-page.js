@@ -19,7 +19,7 @@ $$(document).on('click', '.show-marker', function(e){
         if(prevOrderDiv == document.getElementById("li-"+this.id)){
 
             $.ajax({
-              url: 'http://localhost:3000/api/v1/formData?orderID='+orderID+'&apiKey=ffa13b8d-de71-4c73-a48d-1bcb56bc2386',
+              url: 'http://192.168.1.70:3000/api/v1/formData?orderID='+orderID+'&apiKey=ffa13b8d-de71-4c73-a48d-1bcb56bc2386',
             beforeSend: function(xhr) {
               myApp.showPreloader();
               xhr.overrideMimeType("text/plain; charset=x-user-defined");

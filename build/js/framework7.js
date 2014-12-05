@@ -10,7 +10,7 @@
  *
  * Licensed under MIT
  *
- * Released on: December 3, 2014
+ * Released on: December 4, 2014
 */
 (function () {
 

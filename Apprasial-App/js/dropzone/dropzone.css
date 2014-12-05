@@ -363,6 +363,8 @@
 .dropzone-previews a.dz-remove:hover {
   color: #666;
 }
+
+/*
 .dropzone a.dz-rename,
 .dropzone-previews a.dz-rename {
   background-image: -webkit-linear-gradient(top, #fafafa, #eee);
@@ -385,7 +387,7 @@
   color: #666;
 }
 
-
+*/
 @-moz-keyframes loading {
   from {
     background-position: 0 -400px;

@@ -308,7 +308,7 @@ require.register("dropzone/lib/dropzone.js", function (exports, module) {
       autoProcessQueue: false,
       autoQueue: true,
       addRemoveLinks: true,
-      addRenameLinks: true,
+      //addRenameLinks: true,
       previewsContainer: null,
       dictDefaultMessage: "Drop files here to upload",
       dictFallbackMessage: "Your browser does not support drag'n'drop file uploads.",
@@ -320,7 +320,7 @@ require.register("dropzone/lib/dropzone.js", function (exports, module) {
       dictCancelUploadConfirmation: "Are you sure you want to cancel this upload?",
       dictRemoveFile: "Remove file",
       dictRemoveFileConfirmation: null,
-      dictRenameFile: "Rename file",
+      //dictRenameFile: "Rename file",
       dictMaxFilesExceeded: "You can not upload any more files.",
       accept: function(file, done) {
         return done();
@@ -428,7 +428,26 @@ require.register("dropzone/lib/dropzone.js", function (exports, module) {
           _ref = file.previewElement.querySelectorAll("[data-dz-name]");
           for (_i = 0, _len = _ref.length; _i < _len; _i++) {
             node = _ref[_i];
-            node.textContent = file.name;
+
+            /*
+            var fileToLoad = file;
+
+            var fileReader = new FileReader();
+
+            fileReader.onload = function(fileLoadedEvent) {
+                var srcData = fileLoadedEvent.target.result; // <--- data: base64
+                console.log(srcData);
+                
+            }
+            fileReader.readAsDataURL(fileToLoad);
+
+            */
+			      var fileName = file.name.split(".");
+            //node.textContent = file.name + _i.toString();  // added - Somenath
+			      var newNumber = Math.floor((Math.random() * 1000000) + 1);
+			      var newName = fileName[0] + "_"+ newNumber.toString() +"."+fileName[1];
+			//console.log(newName);
+            node.textContent = newName;  // added - Somenath
           }
           _ref1 = file.previewElement.querySelectorAll("[data-dz-size]");
           for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
@@ -439,10 +458,12 @@ require.register("dropzone/lib/dropzone.js", function (exports, module) {
             file._removeLink = Dropzone.createElement("<a class=\"dz-remove\" href=\"javascript:undefined;\" data-dz-remove>" + this.options.dictRemoveFile + "</a>");
             file.previewElement.appendChild(file._removeLink);
           }
+          /*
           if(this.options.addRenameLinks){
             file._renameLink = Dropzone.createElement("<a class=\"dz-rename\" href=\"javascript:undefined;\" data-dz-rename>" + this.options.dictRenameFile + "</a>");
             file.previewElement.appendChild(file._renameLink);
           }
+          */
           removeFileEvent = (function(_this) {
             return function(e) {
               e.preventDefault();
@@ -462,32 +483,33 @@ require.register("dropzone/lib/dropzone.js", function (exports, module) {
               }
             };
           })(this);
+        /*
         renameFileEvent = (function(_this) {
            return function(e) {
              e.preventDefault();
-             e.stopPropagation();
-             for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-                node = _ref[_i];
-              }
-             fileName = prompt("Rename to?", node.textContent);
+             fileName = prompt("Rename to?", file.name);
              if (fileName != null) {
-              node.textContent = fileName;
+              for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+                node = _ref[_i];
+                node.textContent = fileName;
+              }
              }
             };
           })(this);
-
+          */
           _ref2 = file.previewElement.querySelectorAll("[data-dz-remove]");
           _results = [];
           for (_k = 0, _len2 = _ref2.length; _k < _len2; _k++) {
             removeLink = _ref2[_k];
             _results.push(removeLink.addEventListener("click", removeFileEvent));
           }
+          /*
           _ref3 = file.previewElement.querySelectorAll("[data-dz-rename]");
           for (_k = 0, _len2 = _ref3.length; _k < _len2; _k++) {
             renameLink = _ref3[_k];
             _results.push(renameLink.addEventListener("click", renameFileEvent));
           }
-
+          */
 
           return _results;
 
@@ -1370,7 +1392,7 @@ require.register("dropzone/lib/dropzone.js", function (exports, module) {
     Dropzone.prototype.uploadFiles = function(files) {
       var file, formData, handleError, headerName, headerValue, headers, i, input, inputName, inputType, key, option, progressObj, response, updateProgress, value, xhr, _i, _j, _k, _l, _len, _len1, _len2, _len3, _m, _ref, _ref1, _ref2, _ref3, _ref4, _ref5;
       xhr = new XMLHttpRequest();
-      for (_i = 0, _len = files.length; _i < _len; _i++) {
+      for (_i = 0, _len = files.length; _i < _len; _i++) {	
         file = files[_i];
         file.xhr = xhr;
       }
@@ -1461,9 +1483,8 @@ require.register("dropzone/lib/dropzone.js", function (exports, module) {
       progressObj = (_ref = xhr.upload) != null ? _ref : xhr;
       progressObj.onprogress = updateProgress;
       headers = {
-        "Accept": "application/json",
-        "Cache-Control": "no-cache",
-        "X-Requested-With": "XMLHttpRequest"
+        "Accept": "application/json"
+
       };
       if (this.options.headers) {
         extend(headers, this.options.headers);
@@ -1472,6 +1493,7 @@ require.register("dropzone/lib/dropzone.js", function (exports, module) {
         headerValue = headers[headerName];
         xhr.setRequestHeader(headerName, headerValue);
       }
+	  //xhr.setRequestHeader('Access-Control-Allow-Headers', '*');
       formData = new FormData();
       if (this.options.params) {
         _ref1 = this.options.params;
@@ -1506,20 +1528,23 @@ require.register("dropzone/lib/dropzone.js", function (exports, module) {
           }
         }
       }
+	  //console.log('data -100');
       for (i = _m = 0, _ref5 = files.length - 1; 0 <= _ref5 ? _m <= _ref5 : _m >= _ref5; i = 0 <= _ref5 ? ++_m : --_m) {
         
         _ref=files[i].previewElement.querySelectorAll("[data-dz-name]");
           for (_i = 0, _len = _ref.length; _i < _len; _i++) {
             node = _ref[_i];
             formData.append(this._getParamName(i), files[i], node.textContent);
-            console.log(this._getParamName(i));
-            console.log(files[i]);
+            //console.log(this._getParamName(i));
+            //console.log(files[i]);
           }
           
       }
-      console.log(formData);
-      console.log(document.formData);
+      //console.log(formData);
+      //console.log(document.formData);
+	  //xhr.open("POST", "http://localhost:3000/upload");
       return xhr.send(formData);
+	  //console.log('data sent');
     };
 
     Dropzone.prototype._finished = function(files, responseText, e) {

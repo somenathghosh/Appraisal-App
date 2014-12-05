@@ -314,7 +314,7 @@ $$(document).on('click', '.save', function(e){
 sendData.formData = JSON.stringify(ko.mapping.toJS(viewModel));
 
       $.ajax({
-          url: 'http://localhost:3000/api/v1/formData?orderID='+orderID+'&apiKey=f5812148-64e5-45d1-9f44-ce51b5a9b741',
+          url: 'http://192.168.1.70:3000/api/v1/formData?orderID='+orderID+'&apiKey=f5812148-64e5-45d1-9f44-ce51b5a9b741',
  contentType: 'application/json',
           type: "POST",
           data: JSON.stringify(sendData),
@@ -359,7 +359,7 @@ $$(document).on('click', '.submit', function(e){
                   sendData.formData = JSON.stringify(ko.mapping.toJS(viewModel));
 sendData.orderStatus = 2;
       $.ajax({
-          url: 'http://localhost:3000/api/v1/formData?orderID='+orderID+'&apiKey=f5812148-64e5-45d1-9f44-ce51b5a9b741',
+          url: 'http://192.168.1.70:3000/api/v1/formData?orderID='+orderID+'&apiKey=f5812148-64e5-45d1-9f44-ce51b5a9b741',
  contentType: 'application/json',
           type: "POST",
           data: JSON.stringify(sendData),
@@ -402,7 +402,7 @@ data.state = $("#state").val();
 sendData.formData = JSON.stringify(data);
 sendData.orderStatus = 1;
       $.ajax({
-          url: 'http://localhost:3000/api/v1/formData?orderID='+orderID+'&apiKey=f5812148-64e5-45d1-9f44-ce51b5a9b741',
+          url: 'http://192.168.1.70:3000/api/v1/formData?orderID='+orderID+'&apiKey=f5812148-64e5-45d1-9f44-ce51b5a9b741',
  contentType: 'application/json',
           type: "POST",
           data: JSON.stringify(sendData),
@@ -433,7 +433,7 @@ $$(document).on('click', '.show-marker', function(e){
             formsToLoad = currentOrderArray[this.id].forms;      
             orderID = currentOrderArray[this.id].orderID;
             $.ajax({
-              url: 'http://localhost:3000/api/v1/formData?orderID='+orderID+'&apiKey=ffa13b8d-de71-4c73-a48d-1bcb56bc2386',
+              url: 'http://192.168.1.70:3000/api/v1/formData?orderID='+orderID+'&apiKey=ffa13b8d-de71-4c73-a48d-1bcb56bc2386',
             beforeSend: function(xhr) {
               myApp.showPreloader();
               xhr.overrideMimeType("text/plain; charset=x-user-defined");
@@ -579,7 +579,7 @@ myApp.onPageInit('main-page-1', function(page) {
     document.getElementById('view-navbar').className = "view view-navbar";
     document.getElementById('view-toolbar').className = "view view-toolbar";
     $.ajax({
-            url: 'http://localhost:3000/api/v1/getOrderDetail?orderPartyID='+userKey+'&apiKey=1dca7720-395c-11e4-916c-0800200c9a66&orderStatus='+listStatus,       
+            url: 'http://192.168.1.70:3000/api/v1/getOrderDetail?orderPartyID='+userKey+'&apiKey=1dca7720-395c-11e4-916c-0800200c9a66&orderStatus='+listStatus,       
             dataType:"text",
             beforeSend: function(xhr) {
                 myApp.showPreloader();
@@ -762,7 +762,7 @@ function login() {
 $$(".index-page").addClass(document.body.className);
     var modal = myApp.modalLogin('Enter your username and password', 'Login: ', function(username, password) {
         $.ajax({
-                url: "http://localhost:3000/api/v1/checkUserCredential?userName=" + username + '&password=' + password + '&apiKey=df5cb700-395b-11e4-916c-0800200c9a66',
+                url: "http://192.168.1.70:3000/api/v1/checkUserCredential?userName=" + username + '&password=' + password + '&apiKey=df5cb700-395b-11e4-916c-0800200c9a66',
                 beforeSend: function(xhr) {
                     myApp.showPreloader();
                     xhr.overrideMimeType("text/plain; charset=x-user-defined");
